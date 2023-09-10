@@ -16,7 +16,7 @@ const ForgetPassword = (props) =>
     {
         const getResponse = ({ message }) =>
         {
-            if (message === "success")
+            if (message.includes("success"))
             {
                 handleClose()
             }
