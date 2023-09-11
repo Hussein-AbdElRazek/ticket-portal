@@ -1,12 +1,12 @@
 import { useState, useCallback, } from "react";
 import { useSnackbar } from "notistack";
 import { trimObject } from "../helpers/trimObject";
-
+import {  useSelector } from "react-redux/es/hooks/useSelector";
 const useHttp = () =>
 {
     const [isLoading, setIsLoading] = useState(false);
     const { enqueueSnackbar: popMessage } = useSnackbar();
-
+    const token = useSelector((state) => state.auth.token)
     const sendRequest = useCallback(async (requestConfig, applyData) =>
     {
         setIsLoading(true);
@@ -16,7 +16,7 @@ const useHttp = () =>
                 await fetch(`https://ticket-portal.onrender.com/${requestConfig.url}`, {
                     method: requestConfig.method ? requestConfig.method : "GET",
                     headers: {
-                        // 'Authorization': 'Bearer ' + authCtx.token,
+                        'Authorization': 'Bearer ' + token,
                         "Content-Type": "application/json",
                     },
                     body: requestConfig.body ?
@@ -42,7 +42,7 @@ const useHttp = () =>
             popMessage(error.message || "Something went wrong", { variant: "error" })
         }
         setIsLoading(false)
-    }, [popMessage])
+    }, [popMessage, token])
     return {
         isLoading,
         sendRequest,

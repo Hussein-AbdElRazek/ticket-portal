@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import useHttp from '../../hooks/use-http';
+import useHttp from '../../../hooks/use-http';
 import SignUpUi from './SignUpUi';
 
 const SignUp = () =>

@@ -3,13 +3,13 @@ import { Link, Typography, Box } from '@mui/material'
 import { LoadingButton } from '@mui/lab';
 import { NavLink } from 'react-router-dom';
 
-import FormCard from '../../components/ui/FormCard'
-import FormContainer from '../../components/formik/FormContainer'
-import { LoopOnInputs } from '../../helpers/LoopOnInputs';
+import FormCard from '../../../components/ui/FormCard'
+import FormContainer from '../../../components/formik/FormContainer'
+import { LoopOnInputs } from '../../../helpers/LoopOnInputs';
 import { signUpInitialValues, signUpInputs } from './signUpInputsData';
 import { signUpValidationSchema } from './signUpValidationSchema';
-import SignInUpInIllustration from '../../components/ui/SignInUpInIllustration';
-import SignInUpCard from '../../components/ui/SignInUpCard';
+import SignInUpInIllustration from '../../../components/ui/SignInUpInIllustration';
+import SignInUpCard from '../../../components/ui/SignInUpCard';
 
 const SignUpUi = (props) =>
 {
@@ -45,7 +45,7 @@ const SignUpUi = (props) =>
           </Typography>
         </FormContainer>
       </FormCard >
-      <SignInUpInIllustration/>
+      <SignInUpInIllustration />
     </SignInUpCard>
   )
 }
