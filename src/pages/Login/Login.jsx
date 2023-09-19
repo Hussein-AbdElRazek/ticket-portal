@@ -26,7 +26,7 @@ const Login = () =>
             if (message === "success")
             {
                 dispatch(authActions.login({ token: token, userData: user }))
-                navigate("/user/", { replace: true });
+                navigate("/", { replace: true });
             }
         };
 

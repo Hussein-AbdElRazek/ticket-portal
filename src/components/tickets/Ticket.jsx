@@ -1,6 +1,6 @@
-import { Card, CardActionArea, CardContent, Typography } from '@mui/material'
+import { Box, Card, CardActionArea, CardContent, Typography } from '@mui/material'
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ticketsActions } from '../../store/tickets-slice';
 import SpanBold from '../ui/SpanBold';
 
@@ -13,6 +13,7 @@ const Ticket = (props) =>
     {
         dispatch(ticketsActions.openTicket(ticket))
     }
+    const role = useSelector(state => state.auth.role);
     return (
         <Card
             square
@@ -21,16 +22,38 @@ const Ticket = (props) =>
                 height: "80px",
                 maxWidth: "100%",
                 borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+                position: "relative",
             }}
             ref={lastTicketRef}
         >
+            {role !== "user" && (
+                <Box
+                    sx={{
+                        width: "100px",
+                        height: "100%",
+                        position: "absolute",
+                        right: 0,
+                    }}
+                >
+                    <SpanBold>
+                        Status:
+                    </SpanBold>
+                    {ticket.isHighPriority && (
+                        <Typography >
+                            High priority
+                        </Typography>
+                    )}
+                    {ticket.isTaken && (
+                        <Typography>Taken</Typography>
+                    )}
+                </Box>
+            )}
             <CardActionArea onClick={handleOpenTicket}>
                 <CardContent
                     sx={{
                         height: "70px",
-                        width: "460px",
+                        width: "350px",
                         overflow: "hidden",
-                        // backgroundColor:"grey"
                     }}
                 >
                     <Typography><SpanBold>Ticket ID: #</SpanBold>{ticketId}</Typography>
@@ -44,8 +67,11 @@ const Ticket = (props) =>
                     >
                         <SpanBold>Ticket Content: </SpanBold>{ticketContent}
                     </Typography>
+
                 </CardContent>
             </CardActionArea>
+
+
         </Card>
     );
 };

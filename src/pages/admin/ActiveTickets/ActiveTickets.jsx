@@ -3,17 +3,17 @@ import TicketsList from '../../../components/tickets/TicketsList'
 import useHttp from '../../../hooks/use-http'
 import { useDispatch, useSelector } from 'react-redux';
 import { ticketsActions } from '../../../store/tickets-slice';
-import TicketPanel from '../../../components/tickets/TicketPanel';
+import AdminTicketPanel from '../../../components/tickets/AdminTicketPanel';
 const Tickets = () =>
 {
     const dispatch = useDispatch();
     const {
-        sendRequest: getUserTickets,
-        isLoading: isLoadingGetUserTickets
+        sendRequest: getActiveTickets,
+        isLoading: isLoadingGetActiveTickets
     } = useHttp();
     const {
-        sendRequest: sendTicket,
-        isLoading: isLoadingSendTicket
+        sendRequest: answerTicket,
+        isLoading: isLoadingAnswerTicket
     } = useHttp();
     const [pagesSize, setPagesSize] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
@@ -29,61 +29,55 @@ const Tickets = () =>
         };
         if (currentPage <= pagesSize)
         {
-            getUserTickets(
+            getActiveTickets(
                 {
-                    url: `getUserTickets?page=${currentPage}&size=10`,
+                    url: `getAllActiveTickets?page=${currentPage}&size=10`,
                     method: "GET",
                 },
                 getResponse
             );
         }
     }, [currentPage])
-
-    const userData = useSelector(state => state.auth.userData);
-
-    const handleSendTicket = (values) =>
+    const ticketId = useSelector(state => state.tickets.openedTicket.ticketId)
+    const handleAnswerTicket = (values, { resetForm }) =>
     {
         const submitData = {
-            customerFirstName: userData.userFirstName,
-            customerLastName: userData.userLastName,
-            ticketContent: values.message
+            answer: values.message
         }
-        const getResponse = ({ message, ticketId }) =>
+        const getResponse = ({ message }) =>
         {
-            if (message === "success")
+            if (message.includes("success"))
             {
-                submitData.ticketId = ticketId;
                 submitData.createdAt = new Date();
-                dispatch(ticketsActions.addNewTicket(submitData))
-                dispatch(ticketsActions.closeNewTicket())
+                submitData._id = new Date();
+                dispatch(ticketsActions.addAnswerToTicket(submitData))
+                resetForm();
             }
         };
 
-        sendTicket(
+        answerTicket(
             {
-                url: `sendTicket`,
-                method: "POST",
+                url: `sendAnswerOnTicket/${ticketId}`,
+                method: "PATCH",
                 body: submitData
             },
             getResponse
         );
     }
     const tickets = useSelector((state) => state.tickets.tickets);
+
+    
     return (
         <>
             <TicketsList
                 tickets={tickets}
-                isLoadingGetTickets={isLoadingGetUserTickets}
+                isLoadingGetTickets={isLoadingGetActiveTickets}
                 currentPage={currentPage}
                 pagesSize={pagesSize}
                 setCurrentPage={setCurrentPage}
-                title="All Tickets"
+                title="All Active Tickets"
             />
-            <TicketPanel
-                placeHolder="Type your inquiry"
-                onSubmit={handleSendTicket}
-                isLoading={isLoadingSendTicket}
-            />
+            <AdminTicketPanel placeholder="Type your reply" onSubmit={handleAnswerTicket} isLoading={isLoadingAnswerTicket} />
         </>
 
     )

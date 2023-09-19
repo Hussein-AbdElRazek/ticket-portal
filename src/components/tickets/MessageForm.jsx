@@ -3,7 +3,7 @@ import { Field, Form, Formik } from 'formik'
 import SendIcon from '@mui/icons-material/Send';
 const MessageForm = (props) =>
 {
-    const { onSubmit, isLoading } = props;
+    const { onSubmit, isLoading, placeholder } = props;
     return (
         <Formik
             initialValues={{
@@ -41,7 +41,8 @@ const MessageForm = (props) =>
                                         padding: "10px",
                                         borderRadius: "5px",
                                         marginRight: "10px"
-                                    }} placeholder='Type your inquiry'
+                                    }} 
+                                    placeholder={placeholder}
                                     {...field}
                                 />
                             )}

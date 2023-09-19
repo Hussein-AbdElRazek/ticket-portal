@@ -26,7 +26,7 @@ const Navbar = (props) =>
                 component="div"
                 color="primary"
                 sx={{ cursor: "pointer", p: 2 }}
-                onClick={() => navigate("/user")}
+                onClick={() => navigate("/")}
             >
                 Ticket Portal
             </Typography>
@@ -38,7 +38,7 @@ const Navbar = (props) =>
                     edge="end"
                     aria-label="account of current user"
                     aria-haspopup="true"
-                    onClick={() => { navigate("/user/profile") }}
+                    onClick={() => { navigate("profile") }}
                     color="primary"
                 >
                     <AccountCircle />

@@ -3,6 +3,7 @@ import React, { useCallback, useRef } from 'react'
 import Ticket from './Ticket'
 import AddTicketBtn from './AddTicketBtn'
 import LoadingSpinner from '../ui/LoadingSpinner'
+import { useSelector } from 'react-redux'
 
 const TicketsList = (props) =>
 {
@@ -14,6 +15,7 @@ const TicketsList = (props) =>
         setCurrentPage,
         title
     } = props;
+    const role = useSelector(state => state.auth.role);
     //for handle pagination
     const observer = useRef();
     const lastTicketRef = useCallback((node) =>
@@ -38,9 +40,11 @@ const TicketsList = (props) =>
                 bottom: 0,
                 width: "500px",
                 borderRight: "1px solid rgba(0, 0, 0, 0.12)",
-                height: "calc(100% - 125.5px)",
+                height: role === "user" ?
+                    "calc(100% - 125.5px)" : "calc(100% - 60px)",
                 overflowY: "auto",
-                marginBottom: "80px",
+                marginBottom: role === "user" ?
+                    "80px" : 0,
                 marginTop: "60px"
             }}
         >
@@ -53,7 +57,9 @@ const TicketsList = (props) =>
                 />
             ))}
             {isLoadingGetTickets && <LoadingSpinner />}
-            <AddTicketBtn />
+            {role === "user" && (
+                <AddTicketBtn />
+            )}
         </Box>
     )
 }

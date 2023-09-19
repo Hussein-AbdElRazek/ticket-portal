@@ -6,7 +6,7 @@ import Message from './Message';
 
 const TicketPanel = (props) =>
 {
-    const { onSubmit, isLoading } = props
+    const { onSubmit, isLoading, placeholder } = props
     const ticket = useSelector((state) => state.tickets.openedTicket);
     const isTicketOpen = useSelector((state) => state.tickets.isTicketOpen);
     const isNewTicket = useSelector((state) => state.tickets.isNewTicket);
@@ -43,7 +43,11 @@ const TicketPanel = (props) =>
                 </>
 
             ) : isNewTicket ? (
-                <MessageForm onSubmit={onSubmit} isLoading={isLoading} />
+                <MessageForm
+                    placeholder={placeholder}
+                    onSubmit={onSubmit}
+                    isLoading={isLoading}
+                />
             ) :
                 (
                     <Box
