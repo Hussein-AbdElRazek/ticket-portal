@@ -75,7 +75,14 @@ const ticketsSlice = createSlice({
             state.tickets = state.tickets.filter(ele =>
                 ele.ticketId !== action.payload
             )
-        }
+        },
+        emptyTickets(state)
+        {
+            state.tickets = [];
+            state.openedTicket={};
+            state.isTicketOpen=false;
+            state.isNewTicket=false;
+        },
 
     }
 })

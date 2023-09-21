@@ -20,6 +20,9 @@ const AddTicketBtn = () =>
                 left: 0,
                 bottom: 0,
                 width: "500px",
+                "@media (max-width:500px)": {
+                    width: "100%",
+                },
             }}
             onClick={handleOpenNewTicket}
         >

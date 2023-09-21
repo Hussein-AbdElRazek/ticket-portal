@@ -4,6 +4,7 @@ import Ticket from './Ticket'
 import AddTicketBtn from './AddTicketBtn'
 import LoadingSpinner from '../ui/LoadingSpinner'
 import { useSelector } from 'react-redux'
+import TabsBar from '../TabsBar'
 
 const TicketsList = (props) =>
 {
@@ -31,6 +32,15 @@ const TicketsList = (props) =>
         })
         if (node) observer.current.observe(node);
     }, [isLoadingGetTickets, currentPage, pagesSize, setCurrentPage])
+    //for tabs super admin
+    const tabs = [
+        { value: 0, label: "Active Tickets", to: "/" },
+        { value: 1, label: "Closed Tickets", to: "/closed" },
+    ];
+    const tabsMap = {
+        "/": 0,
+        "/closed": 1,
+    };
     return (
         <Box
             sx={{
@@ -39,6 +49,7 @@ const TicketsList = (props) =>
                 top: 0,
                 bottom: 0,
                 width: "500px",
+                maxWidth:"100%",
                 borderRight: "1px solid rgba(0, 0, 0, 0.12)",
                 height: role === "user" ?
                     "calc(100% - 125.5px)" : "calc(100% - 60px)",
@@ -48,6 +59,12 @@ const TicketsList = (props) =>
                 marginTop: "60px"
             }}
         >
+            {role==="superAdmin" &&(
+                <TabsBar
+                    tabs={tabs}
+                    tabsMap={tabsMap}
+                />
+            )}
             <Typography variant="h6" m="16px" color="primary" >{title}</Typography>
             {tickets.map((ticket, index) => (
                 <Ticket

@@ -80,7 +80,7 @@ const Tickets = () =>
                 title="All Tickets"
             />
             <TicketPanel
-                placeHolder="Type your inquiry"
+                placeholder="Type your inquiry"
                 onSubmit={handleSendTicket}
                 isLoading={isLoadingSendTicket}
             />

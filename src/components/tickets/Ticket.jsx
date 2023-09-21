@@ -53,10 +53,17 @@ const Ticket = (props) =>
                     sx={{
                         height: "70px",
                         width: "350px",
+                        "@media (max-width:500px)": {
+                            width: "calc(100% - 150px)",
+                        },
                         overflow: "hidden",
                     }}
                 >
-                    <Typography><SpanBold>Ticket ID: #</SpanBold>{ticketId}</Typography>
+                    <Typography sx={{
+                        "@media (max-width:500px)": {
+                            display:"none"
+                        },
+                    }}><SpanBold>Ticket ID: </SpanBold>#{ticketId}</Typography>
                     <Typography
                         variant="body1"
                         sx={{

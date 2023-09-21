@@ -34,10 +34,18 @@ const useSocket = () =>
             console.log("res", res)
         })
     }
+    const markAsHighPriority = (data) =>
+    {
+        socket.emit("markAsHighPriority", data, (res) =>
+        {
+            console.log("res", res)
+        })
+    }
     return {
         markTicketStatus,
         newChangeOnTickets,
-        joinRoom
+        joinRoom,
+        markAsHighPriority,
     }
 }
 export default useSocket;

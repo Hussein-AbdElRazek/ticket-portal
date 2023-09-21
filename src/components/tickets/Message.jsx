@@ -22,7 +22,7 @@ const Message = (props) =>
                 float: type === "send" ? "right" : "left",
                 clear: "both",
                 maxWidth: "50%",
-                minWidth: "200px",
+                minWidth: "100px",
                 position: "relative",
                 fontSize: "16px"
             }}
@@ -43,9 +43,9 @@ const Message = (props) =>
                         }}
                     />
                     <span>
-                        <SpanBold>Ticket ID: </SpanBold>#{ticketId}
+                        <>Ticket ID: </>#{ticketId}
                     </span>
-                    <div><SpanBold>Ticket content: </SpanBold></div>
+                    <div><>Ticket content: </></div>
                 </>
             )
                 : (

@@ -23,6 +23,20 @@ const SignInUpInIllustration = () =>
           Ticket Portal
         </Typography>
         <img src={img} alt="Background" style={{ width: "90%", }} />
+        <Box
+          sx={{
+            position: "absolute",
+            right: 20,
+            bottom: 20,
+            fontSize: 10
+          }}
+        >
+          Image by
+          <a
+            target='blank'
+            href="https://www.freepik.com/free-vector/organic-flat-customer-support-illustration_13184981.htm#query=customer%20service&position=5&from_view=keyword&track=ais">Freepik</a>
+
+        </Box>
       </Box>
     </Box>
   )

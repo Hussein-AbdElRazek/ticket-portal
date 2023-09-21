@@ -1,10 +1,14 @@
-import { Box, IconButton, Paper, Typography } from '@mui/material'
+import { Box, Button, IconButton, Paper, Typography } from '@mui/material'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import SearchBar from './SearchBar';
 
 const Navbar = (props) =>
 {
+    const { handleSearch, isLoadingSearch } = props;
     const navigate = useNavigate();
+    const role = useSelector(state => state.auth.role)
     return (
         <Paper
             variant="outlined"
@@ -16,7 +20,7 @@ const Navbar = (props) =>
                 alignItems: "center",
                 justifyContent: "space-between",
                 backgroundColor: "white",
-                zIndex: 999,
+                zIndex: 9999,
                 borderRadius: 0,
             }}>
 
@@ -30,9 +34,15 @@ const Navbar = (props) =>
             >
                 Ticket Portal
             </Typography>
+            {role === "superAdmin" && (
+                <SearchBar handleSearch={handleSearch} isLoadingSearch={isLoadingSearch} />
+            )}
             <Box
                 sx={{ p: 2 }}
             >
+                {role === "superAdmin" && (
+                    <Button onClick={() => { navigate("admins") }}>Admins</Button>
+                )}
                 <IconButton
                     size="large"
                     edge="end"

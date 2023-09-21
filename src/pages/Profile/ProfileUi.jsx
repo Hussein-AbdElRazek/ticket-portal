@@ -2,7 +2,7 @@ import { Box, Button, Paper, useTheme } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import { LoopOnInputs } from '../../helpers/LoopOnInputs';
-import { profileDataInputs } from './profileDataInputs';
+import { profileDataAdminsInputs, profileDataGeneralInputs } from './profileDataInputs';
 import { LoadingButton } from '@mui/lab';
 import { Form, Formik } from 'formik';
 
@@ -39,10 +39,10 @@ const ProfileUi = (props) =>
                     position: "relative",
                     [theme.breakpoints.up('md')]: {
                         mx: 15,
-                        width:"500px",
-                        display:"flex",
-                        flexDirection:"column",
-                        justifyContent:"center"
+                        width: "500px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center"
                     },
                 }}
             >
@@ -56,8 +56,15 @@ const ProfileUi = (props) =>
                     onSubmit={handleEditProfile}
                 >
                     {(formik) => <Form>
+                        {profileData.role === "user" && (
+                            <LoopOnInputs
+                                inputs={profileDataGeneralInputs}
+                                disabled={!isEdit || isLoadingEditProfile}
+                            />
+                        )}
+
                         <LoopOnInputs
-                            inputs={profileDataInputs}
+                            inputs={profileDataAdminsInputs}
                             disabled={!isEdit || isLoadingEditProfile}
                         />
                         <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>

@@ -1,4 +1,23 @@
-export const profileDataInputs = [
+
+export const profileDataAdminsInputs = [
+    {
+        control: "input",
+        type: "email",
+        name: "email",
+        label: "Email",
+        size: "small",
+
+    },
+    {
+        control: "input",
+        type: "text",
+        name: "userName",
+        label: "User Name",
+        size: "small",
+    },
+
+]
+export const profileDataGeneralInputs = [
     {
         control: "input",
         type: "text",
@@ -21,23 +40,8 @@ export const profileDataInputs = [
         control: "input",
         type: "text",
         name: "mobileNumber",
-        label: "Mobile Number", 
+        label: "Mobile Number",
         disabled: true,
-        size: "small",
-    },
-    {
-        control: "input",
-        type: "email",
-        name: "email",
-        label: "Email",
-        size: "small",
-
-    },
-    {
-        control: "input",
-        type: "text",
-        name: "userName",
-        label: "User Name",
         size: "small",
     },
 

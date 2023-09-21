@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react'
 import { Box } from '@mui/material'
 import { Navigate, Route, Routes } from "react-router-dom"
+import { useDispatch } from 'react-redux'
 
 import Navbar from '../../../components/navbar/Navbar'
-import ActiveTickets from '../../admin/ActiveTickets/ActiveTickets'
 import Profile from '../../Profile/Profile'
 import useSocket from '../../../hooks/use-socket.js'
-import { useDispatch } from 'react-redux'
 import { ticketsActions } from '../../../store/tickets-slice'
-const AdminHome = () =>
+import Admins from '../Admins/Admins'
+import Tickets from '../Tickets/Tickets'
+import useHttp from '../../../hooks/use-http'
+const SuperAdminHome = () =>
 {
   const { newChangeOnTickets, joinRoom } = useSocket();
   const dispatch = useDispatch();
-  console.log("home rednder")
+  const {
+    isLoading: isLoadingSearch,
+    sendRequest: search,
+  } = useHttp();
   joinRoom();
   useEffect(() =>
   {
-    console.log("useEf home")
     if (newChangeOnTickets?.ticketId)
     {
       if (newChangeOnTickets.ticketStatus === "taken")
@@ -29,22 +33,42 @@ const AdminHome = () =>
         dispatch(ticketsActions.closeTicket(newChangeOnTickets.ticketId))
       }
     }
-  }, [dispatch,newChangeOnTickets])
+  }, [dispatch, newChangeOnTickets])
+  const handleSearch = ({ ticketId }) =>
+  {
+    const getResponse = ({ message, data }) =>
+    {
+      if (message === "success")
+      {
+        data.ticketId = data._id;
+        dispatch(ticketsActions.openTicket(data))
+      }
+    };
+    search(
+      {
+        url: `searchForTicket/${ticketId.slice(1)}`,
+        method: "GET",
+      },
+      getResponse
+    );
+  }
   return (
     <>
-      <Navbar />
+      <Navbar handleSearch={handleSearch} isLoadingSearch={isLoadingSearch} />
       <Box
         component="main"
         sx={{ flexGrow: 2, pt: 10 }}
       >
         <Routes>
-          <Route index element={<ActiveTickets />} />
+          <Route path="/*" element={<Tickets />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="admins/*" element={<Admins />} />
           <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Routes>
+
       </Box>
     </>
   )
 }
 
-export default AdminHome
+export default SuperAdminHome

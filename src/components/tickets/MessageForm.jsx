@@ -23,7 +23,12 @@ const MessageForm = (props) =>
                         display: "flex",
                         alignItems: "center",
                         paddingX: "20px",
-                        paddingY: "10px"
+                        paddingY: "10px",
+                        overflowX: "auto",
+                        "@media (max-width:890px)": {
+                            width: "calc(100% - 40px)",
+                            zIndex: 9999,
+                        },
                     }}>
                         <Field name="message" >
                             {({ field }) => (

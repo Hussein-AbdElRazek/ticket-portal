@@ -6,7 +6,8 @@ const SpanBold = (props) =>
     return (
         <span
             style={{
-                fontWeight: "bold"
+                fontWeight: "bold",
+                color:"rgb(202,116,65)"
             }}>
             {children}
         </span>

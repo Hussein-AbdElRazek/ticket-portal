@@ -6,7 +6,9 @@ const SignInUpCard = ({children}) => {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center"
+        justifyContent: "center",
+        alignItems:"center",
+        minHeight:"100vh",
       }}
     >
       {children}

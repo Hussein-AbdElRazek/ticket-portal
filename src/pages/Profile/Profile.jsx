@@ -78,10 +78,11 @@ const Profile = () =>
     {
         setIsChangePasswordOpen(true)
     }
+    const role = useSelector(state=>state.auth.role)
     const handleLogout = () =>
     {
         dispatch(authActions.logout());
-        navigate("/user/login")
+        navigate(`/${role}/login`)
     }
     return (
         <>
