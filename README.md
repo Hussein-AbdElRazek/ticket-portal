@@ -6,9 +6,9 @@ Ticket Portal is to enhance customer service relationships, promote customer ret
 
 ## Visit Website from here:
 
-User: https://ticket-portal-ten.vercel.app/user/
-Admin: https://ticket-portal-ten.vercel.app/admin/login
-Super Admin: https://ticket-portal-ten.vercel.app/superAdmin/login
+* User: https://ticket-portal-ten.vercel.app/user/
+* Admin: https://ticket-portal-ten.vercel.app/admin/login
+* Super Admin: https://ticket-portal-ten.vercel.app/superAdmin/login
 
 ## Main Features:
 
