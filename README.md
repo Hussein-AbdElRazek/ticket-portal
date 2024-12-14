@@ -4,12 +4,6 @@ These my second task in my internship @Asterisc Technocrat
 
 Ticket Portal is to enhance customer service relationships, promote customer retention, and drive sales growth. By this system, businesses can streamline their support processes, provide efficient assistance to customers and optimize their overall customer service experience
 
-## Visit Website from here:
-
-* User: https://ticket-portal-ten.vercel.app/user/
-* Admin: https://ticket-portal-ten.vercel.app/admin/login
-* Super Admin: https://ticket-portal-ten.vercel.app/superAdmin/login
-
 ## Main Features:
 
 ### User:
